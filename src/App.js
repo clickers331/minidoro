@@ -1,5 +1,5 @@
+import MainPage from "./pages/MainPage";
 function App() {
-  return <h1>Code goes here</h1>;
+  return <MainPage />;
 }
-
 export default App;
