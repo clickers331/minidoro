@@ -12,8 +12,8 @@ const TimeContextProvider = (props) => {
     <TimeContext.Provider
       value={{
         timeModeData: {
-          timeModeP: timeMode,
-          setTimeModeP: setTimeMode,
+          timeMode: timeMode,
+          setTimeMode: setTimeMode,
         },
       }}
     >
