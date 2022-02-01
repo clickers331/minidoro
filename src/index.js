@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./App";
-import { TimeContextProvider } from "./context/timeContext";
+import ContextProvider from "./context/mergeContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <TimeContextProvider>
+    <ContextProvider>
       <App />
-    </TimeContextProvider>
+    </ContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
