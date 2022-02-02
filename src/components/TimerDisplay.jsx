@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "../context/configContext";
 import styled from "styled-components";
 
+// --------------------
+// Styled Components
+// --------------------
 const StyledTimerDisplay = styled.div`
   font-family: ${(props) => props.theme.fontFamily}, sans-serif;
   display: flex;
@@ -13,16 +16,33 @@ const StyledTimerDisplay = styled.div`
 const StyledTimer = styled.h1`
   font-size: 10rem;
   color: ${(props) => props.theme.text};
+  cursor: pointer;
+  transition-duration: ${(props) =>
+    props.theme.animations.transitionDuration};
+  &:hover {
+    color: ${(props) => props.theme.accent};
+  }
+  &:active {
+    transform: ${(props) => props.theme.animations.button.onClick};
+  }
 `;
 
 const StyledTimerButton = styled.button`
-  display: ${(props) => (props.timerGoing ? "none" : "inline-block")};
+  display: ${(props) => {
+    return props.show
+      ? props.timerGoing
+        ? "none"
+        : "inline-block"
+      : "none";
+  }};
+  opacity: 100;
   font-family: inherit;
   font-size: 2rem;
   padding: 0.2em 1em;
   cursor: pointer;
   border: none;
-  transition-duration: 100ms;
+  transition-duration: ${(props) =>
+    props.theme.animations.transitionDuration};
   color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.accent};
   border-radius: 10px;
@@ -31,14 +51,19 @@ const StyledTimerButton = styled.button`
   }
   &:active {
     transform: ${(props) => props.theme.animations.button.onClick};
+    opacity: 0;
   }
 `;
 
+// ---------------------
+// Component Itself
+// ---------------------
 function TimerDisplay() {
-  const configContext = useContext(ConfigContext); //Grab the timeContext to use in component
-  const [time, setTime] = useState(
-    configContext.config.timeModes.pomodoro.timeInSeconds
-  ); //Create a copy of the timeInSeconds to reduce in component
+  const configContext = useContext(ConfigContext);
+  console.log(configContext); //Grab the timeContext to use in component
+  const defaultTimeInSeconds =
+    configContext.config.timeModes.pomodoro.timeInSeconds;
+  const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
   const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
 
   // Format time into minutes and seconds and stitch them together
@@ -50,7 +75,14 @@ function TimerDisplay() {
       : time % 60
     : time % 60;
   const formattedTime = `${minutes}${seconds}`;
-
+  const startTimer = () => {
+    if (time === 0) {
+      setTime(defaultTimeInSeconds);
+      setTimerGoing((prevTimerGoing) => !prevTimerGoing);
+    } else {
+      setTimerGoing((prevTimerGoing) => !prevTimerGoing);
+    }
+  };
   useEffect(() => {
     console.log(time);
     let timerTimeout;
@@ -70,24 +102,17 @@ function TimerDisplay() {
   return (
     <StyledTimerDisplay>
       <StyledTimer
-        onClick={() => {
-          setTimerGoing(false);
-        }}
+        onClick={() => (timerGoing ? setTimerGoing(false) : startTimer())}
+        timerGoing={timerGoing}
       >
         {formattedTime}
       </StyledTimer>
       <StyledTimerButton
-        onClick={() => {
-          if (time === 0) {
-            setTime(10);
-            setTimerGoing((prevTimerGoing) => !prevTimerGoing);
-          } else {
-            setTimerGoing((prevTimerGoing) => !prevTimerGoing);
-          }
-        }}
+        onClick={() => (timerGoing ? setTimerGoing(false) : startTimer())}
         timerGoing={timerGoing}
+        show={JSON.parse(configContext.config.elements.button)}
       >
-        {timerGoing ? "Stop" : "Start"}
+        Start
       </StyledTimerButton>
     </StyledTimerDisplay>
   );

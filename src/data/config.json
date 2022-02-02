@@ -5,10 +5,16 @@
       "background": "#101010",
       "accent": "#00C896",
       "fontFamily": "Inter",
+      "fontSizes": {
+        "fontSizeLarge": "10rem",
+        "fontSizeRegular": "1rem",
+        "fontSizeSmall": ".7rem"
+      },
       "animations": {
+        "transitionDuration": "200ms",
         "button": {
           "hover": "scale(1.05)",
-          "onClick": "scale(0.9)"
+          "onClick": "scale(0.95)"
         }
       }
     },
@@ -29,5 +35,8 @@
     "pomodoro": {
       "timeInSeconds": 1500
     }
+  },
+  "elements": {
+    "button": "false"
   }
 }

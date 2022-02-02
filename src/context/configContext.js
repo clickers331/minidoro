@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { createContext } from "react/cjs/react.development";
+import { useState, createContext } from "react";
 import { ThemeProvider } from "styled-components";
 import config from "../data/config.json";
 
