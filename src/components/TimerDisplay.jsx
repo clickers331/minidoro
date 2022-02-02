@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TimeContext } from "../context/timeContext";
+import { ConfigContext } from "../context/configContext";
 import styled from "styled-components";
 
 const StyledTimerDisplay = styled.div`
@@ -16,6 +16,7 @@ const StyledTimer = styled.h1`
 `;
 
 const StyledTimerButton = styled.button`
+  display: ${(props) => (props.timerGoing ? "none" : "inline-block")};
   font-family: inherit;
   font-size: 2rem;
   padding: 0.2em 1em;
@@ -26,13 +27,18 @@ const StyledTimerButton = styled.button`
   background: ${(props) => props.theme.accent};
   border-radius: 10px;
   &:hover {
-    transform: translateY(-5px);
+    transform: ${(props) => props.theme.animations.button.hover};
+  }
+  &:active {
+    transform: ${(props) => props.theme.animations.button.onClick};
   }
 `;
 
 function TimerDisplay() {
-  const timeContext = useContext(TimeContext); //Grab the timeContext to use in component
-  const [time, setTime] = useState(10); //Create a copy of the timeInSeconds to reduce in component
+  const configContext = useContext(ConfigContext); //Grab the timeContext to use in component
+  const [time, setTime] = useState(
+    configContext.config.timeModes.pomodoro.timeInSeconds
+  ); //Create a copy of the timeInSeconds to reduce in component
   const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
 
   // Format time into minutes and seconds and stitch them together
@@ -56,7 +62,6 @@ function TimerDisplay() {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
     } else {
-      clearTimer();
       setTimerGoing(false);
     }
     return clearTimer;
@@ -64,7 +69,13 @@ function TimerDisplay() {
 
   return (
     <StyledTimerDisplay>
-      <StyledTimer>{formattedTime}</StyledTimer>
+      <StyledTimer
+        onClick={() => {
+          setTimerGoing(false);
+        }}
+      >
+        {formattedTime}
+      </StyledTimer>
       <StyledTimerButton
         onClick={() => {
           if (time === 0) {
@@ -74,6 +85,7 @@ function TimerDisplay() {
             setTimerGoing((prevTimerGoing) => !prevTimerGoing);
           }
         }}
+        timerGoing={timerGoing}
       >
         {timerGoing ? "Stop" : "Start"}
       </StyledTimerButton>
