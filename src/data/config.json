@@ -1,0 +1,33 @@
+{
+  "themes": {
+    "dark": {
+      "text": "white",
+      "background": "#101010",
+      "accent": "#00C896",
+      "fontFamily": "Inter",
+      "animations": {
+        "button": {
+          "hover": "scale(1.05)",
+          "onClick": "scale(0.9)"
+        }
+      }
+    },
+    "light": {
+      "text": "#101010",
+      "background": "white",
+      "accent": "#00C896",
+      "fontFamily": "Inter",
+      "animations": {
+        "button": {
+          "hover": "scale(1.05)",
+          "onClick": "scale(0.9)"
+        }
+      }
+    }
+  },
+  "timeModes": {
+    "pomodoro": {
+      "timeInSeconds": 1500
+    }
+  }
+}

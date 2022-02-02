@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./App";
-import ContextProvider from "./context/mergeContext";
+import { ConfigContextProvider } from "./context/configContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
+    <ConfigContextProvider>
       <App />
-    </ContextProvider>
+    </ConfigContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
