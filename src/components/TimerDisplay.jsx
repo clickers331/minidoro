@@ -3,7 +3,7 @@ import { TimeContext } from "../context/timeContext";
 import styled from "styled-components";
 
 const StyledTimerDisplay = styled.div`
-  background: ${(props) => props.theme.background};
+  font-family: ${(props) => props.theme.fontFamily}, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,9 +12,11 @@ const StyledTimerDisplay = styled.div`
 
 const StyledTimer = styled.h1`
   font-size: 10rem;
+  color: ${(props) => props.theme.text};
 `;
 
 const StyledTimerButton = styled.button`
+  font-family: inherit;
   font-size: 2rem;
   padding: 0.2em 1em;
   cursor: pointer;

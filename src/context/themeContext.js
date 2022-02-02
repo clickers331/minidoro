@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import themes from "../data/themes";
+import config from "../data/config";
 
 const ThemeContextProvider = (props) => {
-  console.log(themes);
-  const [theme, setTheme] = useState(themes.dark);
+  console.log(config);
+  const [theme, setTheme] = useState(config.themes.dark);
   return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
 };
 
