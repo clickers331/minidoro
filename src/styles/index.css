@@ -132,21 +132,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-/*--------------------*/
-/* Variables          */
-/*--------------------*/
-:root {
-  --clr-dark: "20 20 20";
-  --clr-accent: "255 79 0";
-  --clr-light: "white";
-}
-/*--------------------*/
-/* Utilities          */
-/*--------------------*/
-/*--------------------*/
-/* Classes            */
-/*--------------------*/
-.timer-display {
-  font-size: 5rem;
-}

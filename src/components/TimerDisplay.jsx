@@ -1,5 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TimeContext } from "../context/timeContext";
+import styled from "styled-components";
+
+const StyledTimerDisplay = styled.div`
+  font-family: ${(props) => props.theme.fontFamily}, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+`;
+
+const StyledTimer = styled.h1`
+  font-size: 10rem;
+  color: ${(props) => props.theme.text};
+`;
+
+const StyledTimerButton = styled.button`
+  font-family: inherit;
+  font-size: 2rem;
+  padding: 0.2em 1em;
+  cursor: pointer;
+  border: none;
+  transition-duration: 100ms;
+  color: ${(props) => props.theme.text};
+  background: ${(props) => props.theme.accent};
+  border-radius: 10px;
+  &:hover {
+    transform: translateY(-5px);
+  }
+`;
 
 function TimerDisplay() {
   const timeContext = useContext(TimeContext); //Grab the timeContext to use in component
@@ -14,7 +43,6 @@ function TimerDisplay() {
       ? `0${time % 60}`
       : time % 60
     : time % 60;
-
   const formattedTime = `${minutes}${seconds}`;
 
   useEffect(() => {
@@ -33,10 +61,11 @@ function TimerDisplay() {
     }
     return clearTimer;
   }, [timerGoing, time]);
+
   return (
-    <div>
-      <p className="timer-display">{formattedTime}</p>
-      <button
+    <StyledTimerDisplay>
+      <StyledTimer>{formattedTime}</StyledTimer>
+      <StyledTimerButton
         onClick={() => {
           if (time === 0) {
             setTime(10);
@@ -47,8 +76,8 @@ function TimerDisplay() {
         }}
       >
         {timerGoing ? "Stop" : "Start"}
-      </button>
-    </div>
+      </StyledTimerButton>
+    </StyledTimerDisplay>
   );
 }
 
