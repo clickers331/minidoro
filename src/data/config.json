@@ -3,17 +3,18 @@
     "dark": {
       "text": "white",
       "background": "#101010",
-      "accent": "#00C896",
-      "fontFamily": "Inter",
+      "accent": "orange",
+      "fontFamily": "JetBrains Mono",
+      "borderRadius": "10px",
       "fontSizes": {
         "fontSizeLarge": "10rem",
         "fontSizeRegular": "1rem",
         "fontSizeSmall": ".7rem"
       },
       "animations": {
-        "transitionDuration": "200ms",
+        "transitionDuration": "150ms",
         "button": {
-          "hover": "scale(1.05)",
+          "hover": "scale(1.1)",
           "onClick": "scale(0.95)"
         }
       }

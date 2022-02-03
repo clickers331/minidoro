@@ -15,10 +15,12 @@ const StyledTimerDisplay = styled.div`
 
 const StyledTimer = styled.h1`
   font-size: 10rem;
-  color: ${(props) => props.theme.text};
   cursor: pointer;
   transition-duration: ${(props) =>
     props.theme.animations.transitionDuration};
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
   &:hover {
     color: ${(props) => props.theme.accent};
   }
@@ -27,42 +29,13 @@ const StyledTimer = styled.h1`
   }
 `;
 
-const StyledTimerButton = styled.button`
-  display: ${(props) => {
-    return props.show
-      ? props.timerGoing
-        ? "none"
-        : "inline-block"
-      : "none";
-  }};
-  opacity: 100;
-  font-family: inherit;
-  font-size: 2rem;
-  padding: 0.2em 1em;
-  cursor: pointer;
-  border: none;
-  transition-duration: ${(props) =>
-    props.theme.animations.transitionDuration};
-  color: ${(props) => props.theme.text};
-  background: ${(props) => props.theme.accent};
-  border-radius: 10px;
-  &:hover {
-    transform: ${(props) => props.theme.animations.button.hover};
-  }
-  &:active {
-    transform: ${(props) => props.theme.animations.button.onClick};
-    opacity: 0;
-  }
-`;
-
 // ---------------------
 // Component Itself
 // ---------------------
 function TimerDisplay() {
-  const configContext = useContext(ConfigContext);
-  console.log(configContext); //Grab the timeContext to use in component
+  const configContext = useContext(ConfigContext); //Grab the configContext to use in component
   const defaultTimeInSeconds =
-    configContext.config.timeModes.pomodoro.timeInSeconds;
+    configContext.config.timeModes.pomodoro.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
   const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
 
@@ -75,16 +48,23 @@ function TimerDisplay() {
       : time % 60
     : time % 60;
   const formattedTime = `${minutes}${seconds}`;
+
   const startTimer = () => {
-    if (time === 0) {
-      setTime(defaultTimeInSeconds);
-      setTimerGoing((prevTimerGoing) => !prevTimerGoing);
-    } else {
-      setTimerGoing((prevTimerGoing) => !prevTimerGoing);
-    }
+    //Start timer by settingTimerGoing to true
+    setTimerGoing(true);
+  };
+
+  const resetTimer = () => {
+    // Reset the timer by resetting the time and stopping the timer
+    setTime(defaultTimeInSeconds);
+    setTimerGoing(false);
+  };
+
+  const pauseTimer = () => {
+    // Pause the timer by stopping the timer
+    setTimerGoing(false);
   };
   useEffect(() => {
-    console.log(time);
     let timerTimeout;
     const clearTimer = () => {
       clearTimeout(timerTimeout);
@@ -93,27 +73,36 @@ function TimerDisplay() {
       timerTimeout = setTimeout(() => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
+    } else if (time === 0) {
+      resetTimer();
     } else {
       setTimerGoing(false);
     }
     return clearTimer;
   }, [timerGoing, time]);
-
+  let numClicks = 0;
+  let singleClickTimer;
   return (
     <StyledTimerDisplay>
       <StyledTimer
-        onClick={() => (timerGoing ? setTimerGoing(false) : startTimer())}
+        onClick={(event) => {
+          numClicks++;
+
+          if (numClicks === 1) {
+            singleClickTimer = setTimeout(() => {
+              numClicks = 0;
+              timerGoing ? pauseTimer() : startTimer();
+            }, 400);
+          } else if (numClicks >= 2) {
+            clearTimeout(singleClickTimer);
+            numClicks = 0;
+            resetTimer();
+          }
+        }}
         timerGoing={timerGoing}
       >
         {formattedTime}
       </StyledTimer>
-      <StyledTimerButton
-        onClick={() => (timerGoing ? setTimerGoing(false) : startTimer())}
-        timerGoing={timerGoing}
-        show={JSON.parse(configContext.config.elements.button)}
-      >
-        Start
-      </StyledTimerButton>
     </StyledTimerDisplay>
   );
 }
