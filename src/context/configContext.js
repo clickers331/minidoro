@@ -1,27 +1,35 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-import config from "../data/config.json";
+import defaultConfigData from "../data/config.json";
 
 const ConfigContext = createContext();
 
 const ConfigContextProvider = (props) => {
-  console.log(config);
-  const [theme, setTheme] = useState(config.themes.dark);
-  const [timeMode, setTimeMode] = useState(config.timeModes.pomodoro);
+  let configData;
+  if (localStorage.getItem("config"))
+    configData = JSON.parse(localStorage.getItem("config"));
+  else {
+    localStorage.setItem("config", JSON.stringify(defaultConfigData));
+    configData = JSON.parse(localStorage.getItem("config"));
+  }
+
+  console.log(configData);
+  const [config, setConfig] = useState({
+    configData: configData,
+    currentTheme: configData.themes.dark,
+    currentTimeMode: configData.timeModes.pomodoro,
+  });
+
+  useEffect(() => {
+    localStorage.setItem("config", JSON.stringify(config.configData));
+  }, [config]);
   return (
     <ConfigContext.Provider
-      value={{
-        config: config,
-        states: {
-          themeState: { theme: theme, setTheme: setTheme },
-          timeModeState: {
-            timeMode: timeMode,
-            setTimeMode: setTimeMode,
-          },
-        },
-      }}
+      value={{ config: config, setConfig: setConfig }}
     >
-      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+      <ThemeProvider theme={config.currentTheme}>
+        {props.children}
+      </ThemeProvider>
     </ConfigContext.Provider>
   );
 };

@@ -16,8 +16,8 @@ const StyledTimerDisplay = styled.div`
 const StyledTimer = styled.h1`
   font-size: 10rem;
   cursor: pointer;
-  transition-duration: ${(props) =>
-    props.theme.animations.transitionDuration};
+  transition-duration: 150ms;
+  color: ${(props) => props.theme.text};
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -35,7 +35,7 @@ const StyledTimer = styled.h1`
 function TimerDisplay() {
   const configContext = useContext(ConfigContext); //Grab the configContext to use in component
   const defaultTimeInSeconds =
-    configContext.config.timeModes.pomodoro.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
+    configContext.config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
   const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
 

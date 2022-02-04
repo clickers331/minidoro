@@ -13,7 +13,6 @@ const StyledPage = styled.div`
 `;
 
 export default function Page(props) {
-  console.log("MainPage rendered");
   return (
     <StyledPage overflow={props.overflow} height={props.height}>
       {props.children}
