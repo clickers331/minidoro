@@ -35,6 +35,9 @@
   "timeModes": {
     "pomodoro": {
       "timeInSeconds": 1500
+    },
+    "break": {
+      "timeInSeconds": 300
     }
   },
   "elements": {

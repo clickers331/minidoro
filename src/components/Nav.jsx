@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import settingsIcon from "../svg/bxs-cog.svg";
 import { transparentize } from "polished";
+import { ConfigContext } from "../context/configContext";
 
-console.log(settingsIcon);
 const StyledNav = styled.div`
   opacity: 0;
   position: fixed;
@@ -60,6 +60,8 @@ const StyledIcon = styled.svg`
 `;
 
 export default function Nav() {
+  const config = useContext(ConfigContext);
+
   return (
     <StyledNav>
       <StyledHomeLink to="/">minimaldoro</StyledHomeLink>
