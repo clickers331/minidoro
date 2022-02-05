@@ -33,6 +33,8 @@ const StyledTimer = styled.h1`
 // Component Itself
 // ---------------------
 function TimerDisplay() {
+  console.log("TimerDisplay Rendered");
+
   const configContext = useContext(ConfigContext); //Grab the configContext to use in component
   const defaultTimeInSeconds =
     configContext.config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset

@@ -9,25 +9,31 @@ const ConfigContextProvider = (props) => {
   if (localStorage.getItem("config"))
     configData = JSON.parse(localStorage.getItem("config"));
   else {
-    localStorage.setItem("config", JSON.stringify(defaultConfigData));
+    localStorage.setItem(
+      "config",
+      JSON.stringify({
+        configData: defaultConfigData,
+        currentTheme: defaultConfigData.themes.dark,
+        currentTimeMode: defaultConfigData.timeModes.pomodoro,
+      })
+    );
     configData = JSON.parse(localStorage.getItem("config"));
   }
-
-  console.log(configData);
-  const [config, setConfig] = useState({
-    configData: configData,
-    currentTheme: configData.themes.dark,
-    currentTimeMode: configData.timeModes.pomodoro,
-  });
+  const [config, setConfig] = useState(configData);
 
   useEffect(() => {
-    localStorage.setItem("config", JSON.stringify(config.configData));
+    localStorage.setItem("config", JSON.stringify(config));
   }, [config]);
   return (
     <ConfigContext.Provider
       value={{ config: config, setConfig: setConfig }}
     >
-      <ThemeProvider theme={config.currentTheme}>
+      <ThemeProvider
+        theme={{
+          ...config.currentTheme,
+          accent: config.currentTimeMode.timeModeAccent,
+        }}
+      >
         {props.children}
       </ThemeProvider>
     </ConfigContext.Provider>

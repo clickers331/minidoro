@@ -20,24 +20,33 @@
       }
     },
     "light": {
-      "text": "#101010",
+      "text": "black",
       "background": "white",
-      "accent": "#00C896",
-      "fontFamily": "Inter",
+      "accent": "orange",
+      "fontFamily": "JetBrains Mono",
+      "borderRadius": "10px",
+      "fontSizes": {
+        "fontSizeLarge": "10rem",
+        "fontSizeRegular": "1rem",
+        "fontSizeSmall": ".7rem"
+      },
       "animations": {
+        "transitionDuration": "150ms",
         "button": {
-          "hover": "scale(1.05)",
-          "onClick": "scale(0.9)"
+          "hover": "scale(1.1)",
+          "onClick": "scale(0.95)"
         }
       }
     }
   },
   "timeModes": {
     "pomodoro": {
-      "timeInSeconds": 1500
+      "timeInSeconds": 1500,
+      "timeModeAccent": "tomato"
     },
     "break": {
-      "timeInSeconds": 300
+      "timeInSeconds": 300,
+      "timeModeAccent": "royalblue"
     }
   },
   "elements": {
