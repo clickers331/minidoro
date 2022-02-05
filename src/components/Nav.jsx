@@ -60,6 +60,8 @@ const StyledIcon = styled.svg`
 `;
 
 export default function Nav() {
+  console.log("Nav rendered");
+
   const config = useContext(ConfigContext);
 
   return (
