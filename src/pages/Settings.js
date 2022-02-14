@@ -12,11 +12,10 @@ const Button = styled.button`
   transition-duration: ${({ theme }) =>
     theme.animations.transitionDuration};
   padding: 0.3em 0.5em;
-  border:none;
-  border-radius ${({ theme }) => theme.borderRadius};
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
- 
 `;
 
 const ButtonSelector = styled(Button)`
@@ -39,7 +38,7 @@ export default function Settings(props) {
   const { config, setConfig } = useContext(ConfigContext);
   const [settings, setSettings] = useState(config);
   const timeModes = config.configData.timeModes;
-  console.log(useLocation());
+  console.log(config.currentTimeMode);
 
   const handleTimeModeChange = (timeModeName) => {
     setConfig((prevConfig) => {
@@ -54,9 +53,11 @@ export default function Settings(props) {
     <Page>
       {Object.keys(timeModes).map((key) => (
         <TimeModeSelectorButton
-          key={key}
+          key={timeModes[key].id}
           onClick={() => handleTimeModeChange(key)}
-          isCurrentTimeMode={config.currentTimeMode === timeModes[key]}
+          isCurrentTimeMode={
+            config.currentTimeMode.id === timeModes[key].id
+          }
         >
           {key}
         </TimeModeSelectorButton>

@@ -41,10 +41,12 @@
   },
   "timeModes": {
     "pomodoro": {
+      "id": 0,
       "timeInSeconds": 1500,
       "timeModeAccent": "tomato"
     },
     "break": {
+      "id": 1,
       "timeInSeconds": 300,
       "timeModeAccent": "royalblue"
     }
