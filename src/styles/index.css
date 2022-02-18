@@ -132,3 +132,14 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+@media all and (max-width: 910px) {
+  :root {
+    font-size: 12px;
+  }
+}
+@media all and (max-width: 900px) {
+  :root {
+    font-size: 12px;
+  }
+}

@@ -1,5 +1,5 @@
 import TimerDisplay from "../components/TimerDisplay";
-import Page from "../components/Page";
+import { Page } from "../libs/Page";
 import React from "react";
 
 export default function MainPage() {
