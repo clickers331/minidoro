@@ -32,18 +32,12 @@ const SelectorButton = styled(Button)`
   color: ${({ text }) => text};
 `;
 
-const TimeModeSelectorButton = styled(SelectorButton)`
-  background: ${({ isCurrentTimeMode, theme }) =>
-    isCurrentTimeMode ? theme.accent : theme.background};
-`;
-
 const SettingsRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 80%;
-  border: white solid 2px;
   @media ${s} {
     width: 100%;
   }
@@ -79,7 +73,8 @@ const Container = styled.div`
   width: 40%;
   height: 80%;
   padding: 0 2rem;
-  border: white solid 2px;
+  border: ${({ theme }) => theme.text} solid 2px;
+  border-radius: ${({ theme }) => `${parseInt(theme.borderRadius) * 2}px`};
   & * {
     margin: 0.4em 0;
   }
@@ -98,7 +93,6 @@ export {
   PageTitle,
   Button,
   SelectorButton,
-  TimeModeSelectorButton,
   SettingsRow,
   SettingsText,
   Container,

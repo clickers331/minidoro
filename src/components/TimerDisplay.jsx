@@ -21,6 +21,7 @@ const StyledTimer = styled.h1`
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+
   &:hover {
     color: ${(props) => props.theme.accent};
   }
@@ -32,15 +33,17 @@ const StyledTimer = styled.h1`
 // ---------------------
 // Component Itself
 // ---------------------
-function TimerDisplay() {
+function TimerDisplay({ timerGoing, setTimerGoing }) {
   console.log("TimerDisplay Rendered");
 
-  const configContext = useContext(ConfigContext); //Grab the configContext to use in component
-  const defaultTimeInSeconds =
-    configContext.config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
+  const { config, setConfig } = useContext(ConfigContext); //Grab the configContext to use in component
+  const defaultTimeInSeconds = config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
-  const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
 
+  useEffect(() => {
+    setTime(defaultTimeInSeconds);
+    setTimerGoing(false);
+  }, [defaultTimeInSeconds]);
   // Format time into minutes and seconds and stitch them together
   const minutes =
     (time - (time % 60)) / 60 < 1 ? "" : (time - (time % 60)) / 60 + ":";

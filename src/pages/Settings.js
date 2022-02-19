@@ -43,22 +43,6 @@ export default function Settings(props) {
       <Container>
         <PageTitle>Settings</PageTitle>
         <SettingsRow>
-          <SettingsText>TimeMode:</SettingsText>
-          <div>
-            {Object.keys(timeModes).map((key) => (
-              <TimeModeSelectorButton
-                key={key}
-                onClick={() => handleTimeModeChange(key)}
-                isCurrentTimeMode={
-                  config.currentTimeMode.id === timeModes[key].id
-                }
-              >
-                {key}
-              </TimeModeSelectorButton>
-            ))}
-          </div>
-        </SettingsRow>
-        <SettingsRow>
           <SettingsText>Theme:</SettingsText>
           <div>
             {Object.keys(themes).map((key) => (
