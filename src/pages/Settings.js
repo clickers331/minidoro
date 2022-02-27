@@ -18,16 +18,8 @@ export default function Settings(props) {
   const [settings, setSettings] = useState(config);
   const timeModes = config.configData.timeModes;
   const themes = config.configData.themes;
-  console.log(config.currentTimeMode);
-
-  const handleTimeModeChange = (timeModeName) => {
-    setConfig((prevConfig) => {
-      return {
-        ...prevConfig,
-        currentTimeMode: prevConfig.configData.timeModes[timeModeName],
-      };
-    });
-  };
+  console.log(config.currentTheme);
+  console.log(config.configData.timeModeDisplayType);
 
   const handleThemeChange = (themeName) => {
     setConfig((prevConfig) => {
@@ -38,12 +30,24 @@ export default function Settings(props) {
     });
   };
 
+  const handleOtherChange = (propToBeChanged, newPropValue) => {
+    setConfig((prevConfig) => {
+      return {
+        ...prevConfig,
+        configData: {
+          ...prevConfig.configData,
+          [propToBeChanged]: newPropValue,
+        },
+      };
+    });
+  };
+
   return (
     <Page column={true}>
       <Container>
         <PageTitle>Settings</PageTitle>
         <SettingsRow>
-          <SettingsText>Theme:</SettingsText>
+          <SettingsText>theme</SettingsText>
           <div>
             {Object.keys(themes).map((key) => (
               <SelectorButton
@@ -55,6 +59,35 @@ export default function Settings(props) {
                 {key}
               </SelectorButton>
             ))}
+          </div>
+        </SettingsRow>
+        <SettingsRow>
+          <SettingsText>timerDisplayMode</SettingsText>
+          <div>
+            <SelectorButton
+              onClick={() =>
+                handleOtherChange("timeModeDisplayType", "minutes")
+              }
+              backgroundColor={
+                config.configData.timeModeDisplayType == "minutes"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              minutes
+            </SelectorButton>
+            <SelectorButton
+              onClick={() =>
+                handleOtherChange("timeModeDisplayType", "seconds")
+              }
+              backgroundColor={
+                config.configData.timeModeDisplayType == "seconds"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              seconds
+            </SelectorButton>
           </div>
         </SettingsRow>
       </Container>

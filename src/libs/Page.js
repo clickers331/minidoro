@@ -37,7 +37,7 @@ const SettingsRow = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
   @media ${s} {
     width: 100%;
   }
@@ -70,7 +70,7 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
   height: 80%;
   padding: 0 2rem;
   border: ${({ theme }) => theme.text} solid 2px;

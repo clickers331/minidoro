@@ -51,7 +51,7 @@ const StyledHomeLink = styled(StyledLink)`
 
 const StyledSettingsLink = styled(StyledLink)`
   &:hover {
-    background: ${(props) => transparentize(0.97, props.theme.text)};
+    background: ${(props) => transparentize(0.97, props.theme.accent)};
   }
 `;
 

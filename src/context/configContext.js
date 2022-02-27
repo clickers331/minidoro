@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-import defaultConfigData from "../data/config.json";
+import defaultConfigData from "../data/defaultConfig.json";
 
 const ConfigContext = createContext();
 
@@ -31,7 +31,6 @@ const ConfigContextProvider = (props) => {
       <ThemeProvider
         theme={{
           ...config.currentTheme,
-          accent: config.currentTimeMode.timeModeAccent,
         }}
       >
         {props.children}

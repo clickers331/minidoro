@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "../context/configContext";
 import styled from "styled-components";
-
+import useSound from "use-sound";
+import clickSfx from "../sound/click-5.mp3";
 // --------------------
 // Styled Components
 // --------------------
@@ -34,11 +35,10 @@ const StyledTimer = styled.h1`
 // Component Itself
 // ---------------------
 function TimerDisplay({ timerGoing, setTimerGoing }) {
-  console.log("TimerDisplay Rendered");
-
   const { config, setConfig } = useContext(ConfigContext); //Grab the configContext to use in component
   const defaultTimeInSeconds = config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
+  const [play] = useSound(clickSfx);
 
   useEffect(() => {
     setTime(defaultTimeInSeconds);
@@ -85,6 +85,7 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
     }
     return clearTimer;
   }, [timerGoing, time]);
+  document.title = formattedTime;
   let numClicks = 0;
   let singleClickTimer;
   return (
@@ -92,7 +93,7 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
       <StyledTimer
         onClick={(event) => {
           numClicks++;
-
+          play();
           if (numClicks === 1) {
             singleClickTimer = setTimeout(() => {
               numClicks = 0;
@@ -106,7 +107,9 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
         }}
         timerGoing={timerGoing}
       >
-        {formattedTime}
+        {config.configData.timeModeDisplayType == "minutes"
+          ? formattedTime
+          : time}
       </StyledTimer>
     </StyledTimerDisplay>
   );

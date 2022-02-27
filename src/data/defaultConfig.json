@@ -3,13 +3,10 @@
     "dark": {
       "id": 0,
       "text": "white",
-      "background": "#101010",
+      "background": "#0d1117",
       "fontFamily": "JetBrains Mono",
       "borderRadius": "10px",
-      "timeModeAccents": {
-        "pomodoro": "tomato",
-        "break": "dodgerblue"
-      },
+      "accent": "#a795f8",
       "fontSizes": {
         "fontSizeLarge": "10rem",
         "fontSizeRegular": "1rem",
@@ -46,45 +43,17 @@
           "onClick": "scale(0.95)"
         }
       }
-    },
-    "orange": {
-      "id": 0,
-      "text": "white",
-      "background": "orange",
-      "accent": "orange",
-      "fontFamily": "JetBrains Mono",
-      "borderRadius": "10px",
-      "timeModeAccents": {
-        "pomodoro": "tomato",
-        "break": "dodgerblue"
-      },
-      "fontSizes": {
-        "fontSizeLarge": "10rem",
-        "fontSizeRegular": "1rem",
-        "fontSizeSmall": ".7rem"
-      },
-      "animations": {
-        "transitionDuration": "200ms",
-        "button": {
-          "hover": "scale(1.1)",
-          "onClick": "scale(0.95)"
-        }
-      }
     }
   },
   "timeModes": {
     "pomodoro": {
       "id": 0,
-      "timeInSeconds": 1500,
-      "timeModeAccent": "tomato"
+      "timeInSeconds": 1500
     },
     "break": {
       "id": 1,
-      "timeInSeconds": 300,
-      "timeModeAccent": "royalblue"
+      "timeInSeconds": 300
     }
   },
-  "elements": {
-    "button": "false"
-  }
+  "timeModeDisplayType": "minutes"
 }
