@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "../context/configContext";
 import styled from "styled-components";
-
+import useSound from "use-sound";
+import clickSfx from "../sound/click-5.mp3";
 // --------------------
 // Styled Components
 // --------------------
@@ -21,6 +22,7 @@ const StyledTimer = styled.h1`
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+
   &:hover {
     color: ${(props) => props.theme.accent};
   }
@@ -32,15 +34,16 @@ const StyledTimer = styled.h1`
 // ---------------------
 // Component Itself
 // ---------------------
-function TimerDisplay() {
-  console.log("TimerDisplay Rendered");
-
-  const configContext = useContext(ConfigContext); //Grab the configContext to use in component
-  const defaultTimeInSeconds =
-    configContext.config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
+function TimerDisplay({ timerGoing, setTimerGoing }) {
+  const { config, setConfig } = useContext(ConfigContext); //Grab the configContext to use in component
+  const defaultTimeInSeconds = config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
-  const [timerGoing, setTimerGoing] = useState(false); //Create a timerGoing state to switch timer on and off
+  const [play] = useSound(clickSfx);
 
+  useEffect(() => {
+    setTime(defaultTimeInSeconds);
+    setTimerGoing(false);
+  }, [defaultTimeInSeconds]);
   // Format time into minutes and seconds and stitch them together
   const minutes =
     (time - (time % 60)) / 60 < 1 ? "" : (time - (time % 60)) / 60 + ":";
@@ -82,6 +85,7 @@ function TimerDisplay() {
     }
     return clearTimer;
   }, [timerGoing, time]);
+  document.title = formattedTime;
   let numClicks = 0;
   let singleClickTimer;
   return (
@@ -89,7 +93,7 @@ function TimerDisplay() {
       <StyledTimer
         onClick={(event) => {
           numClicks++;
-
+          play();
           if (numClicks === 1) {
             singleClickTimer = setTimeout(() => {
               numClicks = 0;
@@ -103,7 +107,9 @@ function TimerDisplay() {
         }}
         timerGoing={timerGoing}
       >
-        {formattedTime}
+        {config.configData.timeModeDisplayType == "minutes"
+          ? formattedTime
+          : time}
       </StyledTimer>
     </StyledTimerDisplay>
   );

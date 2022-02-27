@@ -1,67 +1,96 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useContext } from "react/cjs/react.development";
-import styled from "styled-components";
-import Page from "../components/Page";
+import {
+  Page,
+  PageTitle,
+  Button,
+  SelectorButton,
+  SettingsText,
+  TimeModeSelectorButton,
+  SettingsRow,
+  Container,
+} from "../libs/Page";
+
 import { ConfigContext } from "../context/configContext";
-
-const Button = styled.button`
-  font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 2rem;
-  cursor: pointer;
-  transition-duration: ${({ theme }) =>
-    theme.animations.transitionDuration};
-  padding: 0.3em 0.5em;
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
-`;
-
-const ButtonSelector = styled(Button)`
-  &:nth-of-type(1) {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-  }
-  &:nth-last-of-type(1) {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-  }
-`;
-
-const TimeModeSelectorButton = styled(ButtonSelector)`
-  background: ${({ isCurrentTimeMode, theme }) =>
-    isCurrentTimeMode ? theme.accent : theme.background};
-`;
 
 export default function Settings(props) {
   const { config, setConfig } = useContext(ConfigContext);
   const [settings, setSettings] = useState(config);
   const timeModes = config.configData.timeModes;
-  console.log(config.currentTimeMode);
+  const themes = config.configData.themes;
+  console.log(config.currentTheme);
+  console.log(config.configData.timeModeDisplayType);
 
-  const handleTimeModeChange = (timeModeName) => {
+  const handleThemeChange = (themeName) => {
     setConfig((prevConfig) => {
       return {
         ...prevConfig,
-        currentTimeMode: prevConfig.configData.timeModes[timeModeName],
+        currentTheme: config.configData.themes[themeName],
+      };
+    });
+  };
+
+  const handleOtherChange = (propToBeChanged, newPropValue) => {
+    setConfig((prevConfig) => {
+      return {
+        ...prevConfig,
+        configData: {
+          ...prevConfig.configData,
+          [propToBeChanged]: newPropValue,
+        },
       };
     });
   };
 
   return (
-    <Page>
-      {Object.keys(timeModes).map((key) => (
-        <TimeModeSelectorButton
-          key={timeModes[key].id}
-          onClick={() => handleTimeModeChange(key)}
-          isCurrentTimeMode={
-            config.currentTimeMode.id === timeModes[key].id
-          }
-        >
-          {key}
-        </TimeModeSelectorButton>
-      ))}
+    <Page column={true}>
+      <Container>
+        <PageTitle>Settings</PageTitle>
+        <SettingsRow>
+          <SettingsText>theme</SettingsText>
+          <div>
+            {Object.keys(themes).map((key) => (
+              <SelectorButton
+                key={key}
+                onClick={() => handleThemeChange(key)}
+                backgroundColor={themes[key].background}
+                text={themes[key].text}
+              >
+                {key}
+              </SelectorButton>
+            ))}
+          </div>
+        </SettingsRow>
+        <SettingsRow>
+          <SettingsText>timerDisplayMode</SettingsText>
+          <div>
+            <SelectorButton
+              onClick={() =>
+                handleOtherChange("timeModeDisplayType", "minutes")
+              }
+              backgroundColor={
+                config.configData.timeModeDisplayType == "minutes"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              minutes
+            </SelectorButton>
+            <SelectorButton
+              onClick={() =>
+                handleOtherChange("timeModeDisplayType", "seconds")
+              }
+              backgroundColor={
+                config.configData.timeModeDisplayType == "seconds"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              seconds
+            </SelectorButton>
+          </div>
+        </SettingsRow>
+      </Container>
     </Page>
   );
 }

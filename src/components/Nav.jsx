@@ -51,7 +51,7 @@ const StyledHomeLink = styled(StyledLink)`
 
 const StyledSettingsLink = styled(StyledLink)`
   &:hover {
-    background: ${(props) => transparentize(0.97, props.theme.text)};
+    background: ${(props) => transparentize(0.97, props.theme.accent)};
   }
 `;
 
@@ -66,7 +66,7 @@ export default function Nav() {
 
   return (
     <StyledNav>
-      <StyledHomeLink to="/">minimaldoro</StyledHomeLink>
+      <StyledHomeLink to="/">minidoro</StyledHomeLink>
       <StyledSettingsLink to="/settings" style={{ aspectRatio: "1" }}>
         <StyledIcon
           xmlns="http://www.w3.org/2000/svg"
