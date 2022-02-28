@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/clickers331/static/css/main.58e91058.css",
-    "main.js": "/clickers331/static/js/main.937047c4.js",
-    "static/js/845.5bbc79a8.chunk.js": "/clickers331/static/js/845.5bbc79a8.chunk.js",
-    "static/media/click-5.mp3": "/clickers331/static/media/click-5.d75e67de41a643de404c.mp3",
-    "index.html": "/clickers331/index.html",
-    "main.58e91058.css.map": "/clickers331/static/css/main.58e91058.css.map",
-    "main.937047c4.js.map": "/clickers331/static/js/main.937047c4.js.map",
-    "845.5bbc79a8.chunk.js.map": "/clickers331/static/js/845.5bbc79a8.chunk.js.map"
+    "main.css": "/minimalist-pomodoro-v2/static/css/main.58e91058.css",
+    "main.js": "/minimalist-pomodoro-v2/static/js/main.d370792c.js",
+    "static/js/845.5bbc79a8.chunk.js": "/minimalist-pomodoro-v2/static/js/845.5bbc79a8.chunk.js",
+    "static/media/click-5.mp3": "/minimalist-pomodoro-v2/static/media/click-5.d75e67de41a643de404c.mp3",
+    "index.html": "/minimalist-pomodoro-v2/index.html",
+    "main.58e91058.css.map": "/minimalist-pomodoro-v2/static/css/main.58e91058.css.map",
+    "main.d370792c.js.map": "/minimalist-pomodoro-v2/static/js/main.d370792c.js.map",
+    "845.5bbc79a8.chunk.js.map": "/minimalist-pomodoro-v2/static/js/845.5bbc79a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.58e91058.css",
-    "static/js/main.937047c4.js"
+    "static/js/main.d370792c.js"
   ]
 }
