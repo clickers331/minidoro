@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useContext } from "react/cjs/react.development";
 import {
   Page,
   PageTitle,
-  Button,
+  Input,
   SelectorButton,
   SettingsText,
-  TimeModeSelectorButton,
   SettingsRow,
   Container,
+  Button,
+  SmallButton,
 } from "../libs/Page";
+import { BsCheckLg } from "react-icons/bs";
 
 import { ConfigContext } from "../context/configContext";
 
 export default function Settings(props) {
+  const firstUpdate = useRef(true);
   const { config, setConfig } = useContext(ConfigContext);
-  const [settings, setSettings] = useState(config);
+  const [inputValue, setInputValue] = useState(
+    config.configData.fontFamily
+  );
+  const [saved, setSaved] = useState(true);
   const timeModes = config.configData.timeModes;
   const themes = config.configData.themes;
-  console.log(config.currentTheme);
-  console.log(config.configData.timeModeDisplayType);
+  console.log(saved);
 
   const handleThemeChange = (themeName) => {
     setConfig((prevConfig) => {
@@ -60,6 +65,34 @@ export default function Settings(props) {
               </SelectorButton>
             ))}
           </div>
+        </SettingsRow>
+        <SettingsRow>
+          <SettingsText>fontFamily</SettingsText>
+          <div style={{ display: "flex" }}>
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              size={`${inputValue.length < 10 ? 10 : inputValue.length}`}
+            />
+            {!saved && (
+              <SmallButton
+                style={{ aspectRatio: "1" }}
+                onClick={() => {
+                  setSaved(true);
+                  handleOtherChange("fontFamily", inputValue);
+                }}
+              >
+                <BsCheckLg />
+              </SmallButton>
+            )}
+          </div>
+          {useEffect(() => {
+            if (firstUpdate.current) {
+              firstUpdate.current = false;
+              return;
+            }
+            setSaved(false);
+          }, [inputValue])}
         </SettingsRow>
         <SettingsRow>
           <SettingsText>timerDisplayMode</SettingsText>

@@ -3,10 +3,10 @@
     "dark": {
       "id": 0,
       "text": "white",
-      "background": "#0d1117",
-      "fontFamily": "JetBrains Mono",
+      "background": "black",
+
       "borderRadius": "10px",
-      "accent": "#a795f8",
+      "accent": "#ff9500",
       "fontSizes": {
         "fontSizeLarge": "10rem",
         "fontSizeRegular": "1rem",
@@ -22,15 +22,10 @@
     },
     "light": {
       "id": 1,
-      "text": "black",
-      "background": "white",
-      "accent": "orange",
-      "fontFamily": "JetBrains Mono",
+      "text": "#0d1117",
+      "background": "aliceblue",
       "borderRadius": "10px",
-      "timeModeAccents": {
-        "pomodoro": "tomato",
-        "break": "dodgerblue"
-      },
+      "accent": "#bb86fc",
       "fontSizes": {
         "fontSizeLarge": "10rem",
         "fontSizeRegular": "1rem",
@@ -55,5 +50,6 @@
       "timeInSeconds": 300
     }
   },
-  "timeModeDisplayType": "minutes"
+  "timeModeDisplayType": "minutes",
+  "fontFamily": "SF UI Display Ultralight"
 }

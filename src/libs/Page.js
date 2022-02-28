@@ -3,6 +3,7 @@ import { transparentize } from "polished";
 import { xs, s, m, l, xl } from "./screenSizes";
 
 const Button = styled.button`
+  text-align: center;
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 1.5rem;
   cursor: pointer;
@@ -10,6 +11,36 @@ const Button = styled.button`
     theme.animations.transitionDuration};
   padding: 0.3em 0.5em;
   border: none;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme, background }) =>
+    background ? theme.background : theme.accent};
+  color: ${({ theme }) => theme.text};
+`;
+
+const SmallButton = styled(Button)`
+  padding: 0.3em 0.3em;
+  display: grid;
+  place-items: center;
+  margin-left: 0;
+`;
+
+const Input = styled.input`
+  text-align: center;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+  font-family: ${({ theme }) => theme.fontFamily};
+  transition-duration: ${({ theme }) =>
+    theme.animations.transitionDuration};
+  font-size: 1.5rem;
+  padding: 0.5em 0.7em;
+  border: none;
+  border-bottom: 3px ${({ theme }) => theme.text} solid;
+  &:focus {
+    border: 3px dashed ${({ theme }) => theme.text};
+    border-bottom: 5px ${({ theme }) => theme.text} solid;
+  }
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
@@ -98,7 +129,9 @@ export {
   PageTitle,
   Button,
   SelectorButton,
+  SmallButton,
   SettingsRow,
   SettingsText,
   Container,
+  Input,
 };

@@ -43,6 +43,9 @@ const StyledHomeLink = styled(StyledLink)`
     color: ${(props) => props.theme.accent};
     background: inherit;
   }
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 const StyledSettingsLink = styled(StyledLink)`
