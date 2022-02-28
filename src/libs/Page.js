@@ -16,7 +16,6 @@ const Button = styled.button`
 `;
 
 const SelectorButton = styled(Button)`
-  box-sizing: border-box;
   &:nth-of-type(1) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;

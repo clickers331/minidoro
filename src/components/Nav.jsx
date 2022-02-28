@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Link } from "react-router-dom";
 import { transparentize } from "polished";
 import { HiCog } from "react-icons/hi";
+import { IconContext } from "react-icons";
 
 const StyledNav = styled.div`
   opacity: 0;
@@ -35,10 +36,6 @@ const StyledLink = styled(Link)`
   padding: 0.2em 0.5em;
   border-radius: ${(props) => props.theme.borderRadius};
   box-sizing: border-box;
-  &:active {
-    color: ${(props) => props.theme.background};
-    background: ${(props) => props.theme.background};
-  }
 `;
 
 const StyledHomeLink = styled(StyledLink)`
@@ -51,27 +48,33 @@ const StyledHomeLink = styled(StyledLink)`
 const StyledSettingsLink = styled(StyledLink)`
   &:hover {
     background: ${(props) => transparentize(0.97, props.theme.accent)};
+    & > * {
+      transform: rotate(60deg);
+    }
   }
-`;
-
-const StyledCog = styled(HiCog)`
-  transtion-duration: ${({ theme }) =>
-    theme.animations.transitionDuration};
-  transform: rotate(0deg);
-  &:hover {
-    transform: rotate(134deg);
+  &:active {
+    & > * {
+      transform: rotate(60deg) scale(1.2);
+    }
   }
-  background: "black";
+  & > * {
+    transition: transform
+      ${({ theme }) =>
+        parseInt(theme.animations.transitionDuration) / 1.5 + "ms"}
+      ease-out;
+    transform: rotate(0deg) scale(1.3);
+  }
 `;
 
 export default function Nav() {
   console.log("Nav rendered");
+  const theme = useTheme();
 
   return (
     <StyledNav>
       <StyledHomeLink to="/timer">minidoro</StyledHomeLink>
       <StyledSettingsLink to="settings" style={{ aspectRatio: "1" }}>
-        <StyledCog />
+        <HiCog />
       </StyledSettingsLink>
     </StyledNav>
   );
