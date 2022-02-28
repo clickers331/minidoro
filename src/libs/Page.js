@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { transparentize } from "polished";
 import { xs, s, m, l, xl } from "./screenSizes";
 
 const Button = styled.button`
@@ -15,6 +16,7 @@ const Button = styled.button`
 `;
 
 const SelectorButton = styled(Button)`
+  box-sizing: border-box;
   &:nth-of-type(1) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
@@ -68,13 +70,17 @@ const SettingsText = styled.p`
 
 const Container = styled.div`
   box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   width: 50%;
   height: 80%;
   padding: 0 2rem;
-  border: ${({ theme }) => theme.text} solid 2px;
-  border-radius: ${({ theme }) => `${parseInt(theme.borderRadius) * 2}px`};
+  border-radius: ${({ theme }) => parseInt(theme.borderRadius) * 2 + "px"};
   & * {
     margin: 0.4em 0;
   }

@@ -69,7 +69,7 @@ export default function Settings(props) {
                 handleOtherChange("timeModeDisplayType", "minutes")
               }
               backgroundColor={
-                config.configData.timeModeDisplayType == "minutes"
+                config.configData.timeModeDisplayType === "minutes"
                   ? config.currentTheme.accent
                   : config.currentTheme.background
               }
@@ -81,7 +81,7 @@ export default function Settings(props) {
                 handleOtherChange("timeModeDisplayType", "seconds")
               }
               backgroundColor={
-                config.configData.timeModeDisplayType == "seconds"
+                config.configData.timeModeDisplayType === "seconds"
                   ? config.currentTheme.accent
                   : config.currentTheme.background
               }
