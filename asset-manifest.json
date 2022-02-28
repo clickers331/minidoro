@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/minimalist-pomodoro-v2/static/css/main.58e91058.css",
+    "main.js": "/minimalist-pomodoro-v2/static/js/main.32b83a1e.js",
+    "static/js/845.5bbc79a8.chunk.js": "/minimalist-pomodoro-v2/static/js/845.5bbc79a8.chunk.js",
+    "static/media/click-5.mp3": "/minimalist-pomodoro-v2/static/media/click-5.d75e67de41a643de404c.mp3",
+    "index.html": "/minimalist-pomodoro-v2/index.html",
+    "static/media/bxs-cog.svg": "/minimalist-pomodoro-v2/static/media/bxs-cog.df182525b8025ad65e3c47ad37b1045e.svg",
+    "main.58e91058.css.map": "/minimalist-pomodoro-v2/static/css/main.58e91058.css.map",
+    "main.32b83a1e.js.map": "/minimalist-pomodoro-v2/static/js/main.32b83a1e.js.map",
+    "845.5bbc79a8.chunk.js.map": "/minimalist-pomodoro-v2/static/js/845.5bbc79a8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58e91058.css",
+    "static/js/main.32b83a1e.js"
+  ]
+}
