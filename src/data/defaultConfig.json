@@ -3,10 +3,9 @@
     "dark": {
       "id": 0,
       "text": "white",
-      "background": "black",
-
+      "background": "#4055bc",
       "borderRadius": "10px",
-      "accent": "#ff9500",
+      "accent": "#dd59bf",
       "fontSizes": {
         "fontSizeLarge": "10rem",
         "fontSizeRegular": "1rem",
@@ -50,6 +49,9 @@
       "timeInSeconds": 300
     }
   },
-  "timeModeDisplayType": "minutes",
-  "fontFamily": "SF UI Display Ultralight"
+  "settings": {
+    "timeModeDisplayType": "minutes",
+    "fontFamily": "SF UI Display Ultralight",
+    "timerColor": "text"
+  }
 }

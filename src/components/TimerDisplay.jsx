@@ -18,13 +18,24 @@ const StyledTimer = styled.h1`
   font-size: 10rem;
   cursor: pointer;
   transition-duration: 150ms;
-  color: ${(props) => props.theme.text};
+  color: ${({ theme }) => theme[theme.timerColor]};
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
 
   &:hover {
-    color: ${(props) => props.theme.accent};
+    color: ${({ theme }) => {
+      switch (theme[theme.timerColor]) {
+        case theme.accent:
+          return theme.text;
+          break;
+        case theme.text:
+          return theme.accent;
+          break;
+        default:
+          return theme.text;
+      }
+    }};
   }
   &:active {
     transform: ${(props) => props.theme.animations.button.onClick};
@@ -107,7 +118,7 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
         }}
         timerGoing={timerGoing}
       >
-        {config.configData.timeModeDisplayType == "minutes"
+        {config.configData.settings.timeModeDisplayType == "minutes"
           ? formattedTime
           : time}
       </StyledTimer>

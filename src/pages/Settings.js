@@ -19,7 +19,7 @@ export default function Settings(props) {
   const firstUpdate = useRef(true);
   const { config, setConfig } = useContext(ConfigContext);
   const [inputValue, setInputValue] = useState(
-    config.configData.fontFamily
+    config.configData.settings.fontFamily
   );
   const [saved, setSaved] = useState(true);
   const timeModes = config.configData.timeModes;
@@ -47,6 +47,21 @@ export default function Settings(props) {
     });
   };
 
+  const handleSettingChange = (settingToBeChanged, newSettingValue) => {
+    setConfig((prevConfig) => {
+      return {
+        ...prevConfig,
+        configData: {
+          ...prevConfig.configData,
+          settings: {
+            ...prevConfig.configData.settings,
+            [settingToBeChanged]: newSettingValue,
+          },
+        },
+      };
+    });
+  };
+
   return (
     <Page column={true}>
       <Container>
@@ -58,7 +73,7 @@ export default function Settings(props) {
               <SelectorButton
                 key={key}
                 onClick={() => handleThemeChange(key)}
-                backgroundColor={themes[key].background}
+                background={themes[key].background}
                 text={themes[key].text}
               >
                 {key}
@@ -79,7 +94,7 @@ export default function Settings(props) {
                 style={{ aspectRatio: "1" }}
                 onClick={() => {
                   setSaved(true);
-                  handleOtherChange("fontFamily", inputValue);
+                  handleSettingChange("fontFamily", inputValue);
                 }}
               >
                 <BsCheckLg />
@@ -99,10 +114,11 @@ export default function Settings(props) {
           <div>
             <SelectorButton
               onClick={() =>
-                handleOtherChange("timeModeDisplayType", "minutes")
+                handleSettingChange("timeModeDisplayType", "minutes")
               }
-              backgroundColor={
-                config.configData.timeModeDisplayType === "minutes"
+              background={
+                config.configData.settings.timeModeDisplayType ===
+                "minutes"
                   ? config.currentTheme.accent
                   : config.currentTheme.background
               }
@@ -111,15 +127,41 @@ export default function Settings(props) {
             </SelectorButton>
             <SelectorButton
               onClick={() =>
-                handleOtherChange("timeModeDisplayType", "seconds")
+                handleSettingChange("timeModeDisplayType", "seconds")
               }
-              backgroundColor={
-                config.configData.timeModeDisplayType === "seconds"
+              background={
+                config.configData.settings.timeModeDisplayType ===
+                "seconds"
                   ? config.currentTheme.accent
                   : config.currentTheme.background
               }
             >
               seconds
+            </SelectorButton>
+          </div>
+        </SettingsRow>
+        <SettingsRow>
+          <SettingsText>timerDisplayColor</SettingsText>
+          <div>
+            <SelectorButton
+              onClick={() => handleSettingChange("timerColor", "text")}
+              background={
+                config.configData.settings.timerColor === "text"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              text
+            </SelectorButton>
+            <SelectorButton
+              onClick={() => handleSettingChange("timerColor", "accent")}
+              background={
+                config.configData.settings.timerColor === "accent"
+                  ? config.currentTheme.accent
+                  : config.currentTheme.background
+              }
+            >
+              accent
             </SelectorButton>
           </div>
         </SettingsRow>

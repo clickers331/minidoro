@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { transparentize } from "polished";
+import { complement } from "polished";
 import { xs, s, m, l, xl } from "./screenSizes";
 
 const Button = styled.button`
@@ -12,16 +12,20 @@ const Button = styled.button`
   padding: 0.3em 0.5em;
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius};
-  background: ${({ theme, background }) =>
-    background ? theme.background : theme.accent};
-  color: ${({ theme }) => theme.text};
+  background: ${({ theme, background }) => {
+    return background ? background : theme.accent;
+  }};
+  color: ${({ theme, invertedText, background }) =>
+    invertedText ? complement(background) : theme.text};
 `;
 
 const SmallButton = styled(Button)`
-  padding: 0.3em 0.3em;
+  padding: 0.3em 0.6em;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
-  margin-left: 0;
+  margin-left: 1.5rem;
 `;
 
 const Input = styled.input`
@@ -60,7 +64,6 @@ const SelectorButton = styled(Button)`
     border-top-right-radius: ${({ theme }) => theme.borderRadius};
   }
   border-radius: 0;
-  background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ text }) => text};
 `;
 
