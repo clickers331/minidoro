@@ -79,6 +79,7 @@ export default function Settings(props) {
                 {key}
               </SelectorButton>
             ))}
+            <SelectorButton></SelectorButton>
           </div>
         </SettingsRow>
         <SettingsRow>

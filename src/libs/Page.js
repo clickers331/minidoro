@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { complement } from "polished";
+import { complement, darken } from "polished";
 import { xs, s, m, l, xl } from "./screenSizes";
 
 const Button = styled.button`
@@ -17,6 +17,10 @@ const Button = styled.button`
   }};
   color: ${({ theme, invertedText, background }) =>
     invertedText ? complement(background) : theme.text};
+  &:hover {
+    background: ${({ theme, background }) =>
+      darken(0.05, background ? background : theme.accent)};
+  }
 `;
 
 const SmallButton = styled(Button)`
