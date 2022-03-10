@@ -33,6 +33,8 @@ const ConfigContextProvider = (props) => {
           ...config.currentTheme,
           fontFamily: config.configData.settings.fontFamily,
           timerColor: config.configData.settings.timerColor,
+          transitionDuration:
+            config.configData.settings.transitionDuration,
         }}
       >
         {props.children}

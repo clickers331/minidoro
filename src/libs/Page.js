@@ -7,8 +7,7 @@ const Button = styled.button`
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 1.5rem;
   cursor: pointer;
-  transition-duration: ${({ theme }) =>
-    theme.animations.transitionDuration};
+  transition-duration: ${({ theme }) => theme.transitionDuration};
   padding: 0.3em 0.5em;
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -23,13 +22,122 @@ const Button = styled.button`
   }
 `;
 
-const SmallButton = styled(Button)`
-  padding: 0.3em 0.6em;
+const Slider = styled.input`
+  background: inherit;
+  overflow: hidden;
+  appearance: none;
+  max-width: 700px;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  display: grid;
+  margin: 0;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    border-radius: 999px;
+    width: 100%;
+    height: 25px;
+    background: ${({ theme }) => darken(0.1, theme.accent)};
+  }
+
+  &::-webkit-slider-thumb {
+    position: relative;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    background: ${({ theme }) => theme.accent};
+    border-radius: 999px;
+    border: 0;
+    transition: all 150ms;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &::-moz-range-track,
+  &::-moz-range-progress {
+    width: 100%;
+    height: 25px;
+    background: ${({ theme }) => theme.accent};
+  }
+
+  &::-moz-range-progress {
+    background: ${({ theme }) => theme.accent};
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    margin: 0;
+    height: 15px;
+    width: 15px;
+    background: ${({ theme }) => theme.accent};
+    border-radius: 100%;
+    border: 0;
+    transition: background-color 150ms;
+  }
+
+  &::-ms-track {
+    width: 100%;
+    height: 10px;
+    border: 0;
+    /* color needed to hide track marks */
+    color: transparent;
+    background: transparent;
+  }
+
+  &::-ms-fill-lower {
+    background: ${({ theme }) => darken(0.1, theme.accent)};
+  }
+
+  &::-ms-fill-upper {
+    background: ${({ theme }) => theme.accent};
+  }
+
+  &::-ms-thumb {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: ${({ theme }) => theme.accent};
+    border-radius: 100%;
+    border: 0;
+    transition: background-color 150ms;
+    /* IE Edge thinks it can support -webkit prefixes */
+    top: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+`;
+
+const SmallButton = styled(Button)`
+  font-size: 1.5rem;
+  &:nth-of-type(1) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
+    border-top-left-radius: ${({ theme }) => theme.borderRadius};
+  }
+  &:nth-last-of-type(1) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: ${({ theme }) => theme.borderRadius};
+    border-top-right-radius: ${({ theme }) => theme.borderRadius};
+  }
+  padding: 0.06em 0.5em;
+  display: inline-grid;
   place-items: center;
-  margin-left: 1.5rem;
+`;
+
+const GroupedSelectors = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const Input = styled.input`
@@ -39,15 +147,15 @@ const Input = styled.input`
   -ms-box-sizing: border-box !important;
   box-sizing: border-box !important;
   font-family: ${({ theme }) => theme.fontFamily};
-  transition-duration: ${({ theme }) =>
-    theme.animations.transitionDuration};
+  transition-duration: ${({ theme }) => theme.transitionDuration};
   font-size: 1.5rem;
   padding: 0.5em 0.7em;
   border: none;
   border-bottom: 3px ${({ theme }) => theme.text} solid;
   &:focus {
-    border: 3px dashed ${({ theme }) => theme.text};
+    border: 3px solid ${({ theme }) => theme.text};
     border-bottom: 5px ${({ theme }) => theme.text} solid;
+    outline: none;
   }
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.background};
@@ -83,8 +191,7 @@ const SettingsRow = styled.div`
 `;
 
 const Page = styled.div`
-  transition-duration: ${(props) =>
-    props.theme.animations.transitionDuration};
+  transition-duration: ${(props) => props.theme.transitionDuration};
   width: 100vw;
   font-family: ${(props) => props.theme.fontFamily};
   height: ${(props) => props.height};
@@ -141,4 +248,6 @@ export {
   SettingsText,
   Container,
   Input,
+  GroupedSelectors,
+  Slider,
 };

@@ -10,21 +10,24 @@ import {
   Container,
   Button,
   SmallButton,
+  GroupedSelectors,
+  Slider,
 } from "../libs/Page";
-import { BsCheckLg } from "react-icons/bs";
+import Modal from "../pages/Modal.jsx";
+import { BsCheckLg, BsPlusLg } from "react-icons/bs";
 
 import { ConfigContext } from "../context/configContext";
 
 export default function Settings(props) {
   const firstUpdate = useRef(true);
   const { config, setConfig } = useContext(ConfigContext);
-  const [inputValue, setInputValue] = useState(
-    config.configData.settings.fontFamily
-  );
-  const [saved, setSaved] = useState(true);
-  const timeModes = config.configData.timeModes;
+
+  const [controlledInputValues, setControlledInputValues] = useState({
+    fontFamily: config.configData.settings.fontFamily,
+    transitionDuration: config.configData.settings.transitionDuration,
+  });
+  const [modalOpen, setModalOpen] = useState(false);
   const themes = config.configData.themes;
-  console.log(saved);
 
   const handleThemeChange = (themeName) => {
     setConfig((prevConfig) => {
@@ -64,11 +67,12 @@ export default function Settings(props) {
 
   return (
     <Page column={true}>
+      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Container>
         <PageTitle>Settings</PageTitle>
         <SettingsRow>
           <SettingsText>theme</SettingsText>
-          <div>
+          <GroupedSelectors>
             {Object.keys(themes).map((key) => (
               <SelectorButton
                 key={key}
@@ -79,40 +83,41 @@ export default function Settings(props) {
                 {key}
               </SelectorButton>
             ))}
-            <SelectorButton></SelectorButton>
-          </div>
+            <SmallButton
+              isGrouped={true}
+              onClick={() => setModalOpen(true)}
+            >
+              <BsPlusLg />
+            </SmallButton>
+          </GroupedSelectors>
         </SettingsRow>
         <SettingsRow>
           <SettingsText>fontFamily</SettingsText>
-          <div style={{ display: "flex" }}>
+          <GroupedSelectors style={{ display: "flex" }}>
             <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              size={`${inputValue.length < 10 ? 10 : inputValue.length}`}
+              value={controlledInputValues.fontFamily}
+              onChange={(e) =>
+                setControlledInputValues((prevVals) => {
+                  return { ...prevVals, fontFamily: e.target.value };
+                })
+              }
+              onBlur={() => {
+                handleSettingChange(
+                  "fontFamily",
+                  controlledInputValues.fontFamily
+                );
+              }}
+              size={`${
+                controlledInputValues.fontFamily.length < 10
+                  ? 10
+                  : controlledInputValues.fontFamily.length
+              }`}
             />
-            {!saved && (
-              <SmallButton
-                style={{ aspectRatio: "1" }}
-                onClick={() => {
-                  setSaved(true);
-                  handleSettingChange("fontFamily", inputValue);
-                }}
-              >
-                <BsCheckLg />
-              </SmallButton>
-            )}
-          </div>
-          {useEffect(() => {
-            if (firstUpdate.current) {
-              firstUpdate.current = false;
-              return;
-            }
-            setSaved(false);
-          }, [inputValue])}
+          </GroupedSelectors>
         </SettingsRow>
         <SettingsRow>
           <SettingsText>timerDisplayMode</SettingsText>
-          <div>
+          <GroupedSelectors>
             <SelectorButton
               onClick={() =>
                 handleSettingChange("timeModeDisplayType", "minutes")
@@ -139,11 +144,11 @@ export default function Settings(props) {
             >
               seconds
             </SelectorButton>
-          </div>
+          </GroupedSelectors>
         </SettingsRow>
         <SettingsRow>
           <SettingsText>timerDisplayColor</SettingsText>
-          <div>
+          <GroupedSelectors>
             <SelectorButton
               onClick={() => handleSettingChange("timerColor", "text")}
               background={
@@ -164,7 +169,34 @@ export default function Settings(props) {
             >
               accent
             </SelectorButton>
-          </div>
+          </GroupedSelectors>
+        </SettingsRow>
+        <SettingsRow>
+          <SettingsText>transitionDuration</SettingsText>
+          <GroupedSelectors>
+            <Slider
+              type="range"
+              min="100"
+              max="500"
+              onChange={(e) =>
+                setControlledInputValues((prevVals) => {
+                  return {
+                    ...prevVals,
+                    transitionDuration: `${e.target.value}ms`,
+                  };
+                })
+              }
+              onBlur={(event) => {
+                return handleSettingChange(
+                  "transitionDuration",
+                  controlledInputValues.transitionDuration
+                );
+              }}
+              value={parseInt(
+                controlledInputValues.transitionDuration
+              ).toString()}
+            />
+          </GroupedSelectors>
         </SettingsRow>
       </Container>
     </Page>

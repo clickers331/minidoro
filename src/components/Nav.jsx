@@ -15,8 +15,7 @@ const StyledNav = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  transition-duration: ${(props) =>
-    props.theme.animations.transitionDuration};
+  transition-duration: ${(props) => props.theme.transitionDuration};
   &:hover {
     opacity: 100;
   }
@@ -26,8 +25,7 @@ const StyledLink = styled(Link)`
   display: grid;
   place-items: center;
   text-decoration: none;
-  transition-duration: ${(props) =>
-    props.theme.animations.transitionDuration};
+  transition-duration: ${(props) => props.theme.transitionDuration};
   font-size: 1.7rem;
   margin: 0 0.3em;
   font-family: ${(props) => props.theme.fontFamily};
@@ -62,8 +60,7 @@ const StyledSettingsLink = styled(StyledLink)`
   }
   & > * {
     transition: transform
-      ${({ theme }) =>
-        parseInt(theme.animations.transitionDuration) / 1.5 + "ms"}
+      ${({ theme }) => parseInt(theme.transitionDuration) / 1.5 + "ms"}
       ease-out;
     transform: rotate(0deg) scale(1.3);
   }

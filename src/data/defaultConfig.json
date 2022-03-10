@@ -5,38 +5,14 @@
       "text": "white",
       "background": "#4055bc",
       "borderRadius": "10px",
-      "accent": "#dd59bf",
-      "fontSizes": {
-        "fontSizeLarge": "10rem",
-        "fontSizeRegular": "1rem",
-        "fontSizeSmall": ".7rem"
-      },
-      "animations": {
-        "transitionDuration": "200ms",
-        "button": {
-          "hover": "scale(1.1)",
-          "onClick": "scale(0.95)"
-        }
-      }
+      "accent": "#dd59bf"
     },
     "light": {
       "id": 1,
       "text": "#0d1117",
       "background": "aliceblue",
       "borderRadius": "10px",
-      "accent": "#bb86fc",
-      "fontSizes": {
-        "fontSizeLarge": "10rem",
-        "fontSizeRegular": "1rem",
-        "fontSizeSmall": ".7rem"
-      },
-      "animations": {
-        "transitionDuration": "200ms",
-        "button": {
-          "hover": "scale(1.1)",
-          "onClick": "scale(0.95)"
-        }
-      }
+      "accent": "#bb86fc"
     }
   },
   "timeModes": {
@@ -52,6 +28,7 @@
   "settings": {
     "timeModeDisplayType": "minutes",
     "fontFamily": "SF UI Display Ultralight",
-    "timerColor": "text"
+    "timerColor": "text",
+    "transitionDuration": "200ms"
   }
 }

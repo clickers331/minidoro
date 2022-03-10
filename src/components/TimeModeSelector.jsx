@@ -9,10 +9,11 @@ const TimeModeSelectorButton = styled(SelectorButton)`
 `;
 
 const StyledTimeModeSelector = styled.div`
-  transition: ${({ theme }) => theme.animations.transitionDuration};
+  transition: ${({ theme }) => theme.transitionDuration};
   opacity: ${({ timerGoing }) => (timerGoing ? "0" : "100")};
   position: absolute;
-  margin-bottom: 15em;
+  margin-bottom: 25em;
+  z-index: 10;
 `;
 
 export default function TimeModeSelector({ timerGoing }) {
