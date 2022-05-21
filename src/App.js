@@ -5,14 +5,14 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <div>
       <Nav />
       <Routes>
         <Route path="timer" element={<MainPage />} />
         <Route path="settings" element={<Settings />} />
         <Route path="/" element={<MainPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
 export default App;

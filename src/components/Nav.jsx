@@ -47,8 +47,9 @@ const StyledHomeLink = styled(StyledLink)`
 `;
 
 const StyledSettingsLink = styled(StyledLink)`
+  border-radius: 50%;
   &:hover {
-    background: ${(props) => transparentize(0.97, props.theme.accent)};
+    background: ${(props) => transparentize(0.5, props.theme.accent)};
     & > * {
       transform: rotate(60deg);
     }

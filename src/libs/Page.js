@@ -18,7 +18,7 @@ const Button = styled.button`
     invertedText ? complement(background) : theme.text};
   &:hover {
     background: ${({ theme, background }) =>
-      darken(0.05, background ? background : theme.accent)};
+      background ? background : theme.accent};
   }
 `;
 

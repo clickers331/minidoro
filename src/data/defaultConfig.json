@@ -27,7 +27,7 @@
   },
   "settings": {
     "timeModeDisplayType": "minutes",
-    "fontFamily": "SF UI Display Ultralight",
+    "fontFamily": "Monospace",
     "timerColor": "text",
     "transitionDuration": "200ms"
   }

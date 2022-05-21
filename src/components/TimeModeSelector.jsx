@@ -12,7 +12,7 @@ const StyledTimeModeSelector = styled.div`
   transition: ${({ theme }) => theme.transitionDuration};
   opacity: ${({ timerGoing }) => (timerGoing ? "0" : "100")};
   position: absolute;
-  margin-bottom: 25em;
+  margin-bottom: 30em;
   z-index: 10;
 `;
 

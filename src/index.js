@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./App";
 import { ConfigContextProvider } from "./context/configContext";
-import { HashRouter, BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <ConfigContextProvider>
-      <HashRouter>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </ConfigContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "../context/configContext";
 import styled from "styled-components";
 import { lighten, darken } from "polished";
-import useSound from "use-sound";
-import clickSfx from "../sound/stone-sliding.mp3";
+
 // --------------------
 // Styled Components
 // --------------------
@@ -45,7 +44,6 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
   const { config, setConfig } = useContext(ConfigContext); //Grab the configContext to use in component
   const defaultTimeInSeconds = config.currentTimeMode.timeInSeconds; //Create a defaultTimeInSeconds to be able to reference it at timer reset
   const [time, setTime] = useState(defaultTimeInSeconds); //Create a copy of the timeInSeconds to reduce in component
-  const [play, { stop }] = useSound(clickSfx, { volume: 0.3 });
 
   useEffect(() => {
     setTime(defaultTimeInSeconds);
@@ -64,29 +62,17 @@ function TimerDisplay({ timerGoing, setTimerGoing }) {
   const startTimer = () => {
     //Start timer by settingTimerGoing to true
     setTimerGoing(true);
-    play();
-    const timeout = setTimeout(() => {
-      stop();
-    }, parseInt(config.configData.settings.transitionDuration));
   };
 
   const resetTimer = () => {
     // Reset the timer by resetting the time and stopping the timer
     setTime(defaultTimeInSeconds);
     setTimerGoing(false);
-    play();
-    const timeout = setTimeout(() => {
-      stop();
-    }, parseInt(config.configData.settings.transitionDuration));
   };
 
   const pauseTimer = () => {
     // Pause the timer by stopping the timer
     setTimerGoing(false);
-    play();
-    const timeout = setTimeout(() => {
-      stop();
-    }, parseInt(config.configData.settings.transitionDuration));
   };
   useEffect(() => {
     let timerTimeout;
